@@ -5,6 +5,7 @@
  */
 package com.example.timetable_server.model;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -21,10 +22,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name="status")
 @EntityListeners(AuditingEntityListener.class)
-public class Status {
+public class Status implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     
     @NotNull
     private String name;
@@ -32,11 +33,11 @@ public class Status {
     @NotNull
     private String nameFull;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

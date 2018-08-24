@@ -6,6 +6,7 @@
 package com.example.timetable_server.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -26,10 +27,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name="worker")
 @EntityListeners(AuditingEntityListener.class)
-public class Worker {
+public class Worker implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     
     @NotNull
     private String name;
@@ -52,11 +53,11 @@ public class Worker {
     @JsonIgnore
     private Calendar calendar;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

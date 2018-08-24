@@ -6,6 +6,7 @@
 package com.example.timetable_server.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -29,10 +30,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name="load")
 @EntityListeners(AuditingEntityListener.class)
-public class Load {
+public class Load implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     
     @NotNull
     private String description;
@@ -47,11 +48,7 @@ public class Load {
     @JsonIgnore
     private Worker worker;
     
-    @ManyToOne(optional=false)
-    @JoinColumn(name="day_of_calendar_id", nullable=false)
-    @OnDelete(action=OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private DayOfCalendar dayOfCalendar;
+    private Date dayOfYear;
     
     @ManyToOne(optional=false)
     @JoinColumn(name="status_id", nullable=false)
@@ -59,11 +56,11 @@ public class Load {
     @JsonIgnore
     private Status status;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -91,12 +88,12 @@ public class Load {
         this.worker = worker;
     }
 
-    public DayOfCalendar getDayOfCalendar() {
-        return dayOfCalendar;
+    public Date getDayOfYear() {
+        return dayOfYear;
     }
 
-    public void setDayOfCalendar(DayOfCalendar dayOfCalendar) {
-        this.dayOfCalendar = dayOfCalendar;
+    public void setDayOfYear(Date dayOfCalendar) {
+        this.dayOfYear = dayOfCalendar;
     }
 
     public Status getStatus() {

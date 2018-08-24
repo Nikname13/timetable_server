@@ -8,6 +8,7 @@ package com.example.timetable_server.model;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,28 +28,28 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Department implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @NotNull
     private String name;
     
-    @OneToOne(optional=false)
+    @OneToOne(fetch = FetchType.LAZY, optional=false)
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getText() {
+    public String getName() {
         return name;
     }
 
-    public void setText(String text) {
+    public void setName(String text) {
         this.name = text;
     }
 
