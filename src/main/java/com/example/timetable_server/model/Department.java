@@ -5,6 +5,7 @@
  */
 package com.example.timetable_server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -32,10 +33,6 @@ public class Department implements Serializable {
 
     @NotNull
     private String name;
-    
-    @OneToOne(fetch = FetchType.LAZY, optional=false)
-    @JoinColumn(name="user_id", nullable=false)
-    private User user;
 
     public Long getId() {
         return id;
@@ -52,15 +49,4 @@ public class Department implements Serializable {
     public void setName(String text) {
         this.name = text;
     }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-    
-    
-    
 }

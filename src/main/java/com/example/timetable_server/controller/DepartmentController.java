@@ -40,11 +40,13 @@ public class DepartmentController {
     
     @GetMapping("/department/{id}")
     public Department getDepartmentById(@PathVariable(value="id") Long departmentId){
-        return findById(departmentId);
+      Department department=  findById(departmentId);
+        return department;
     }
     
     @PostMapping("/department")
     public Department createDepartment(@Valid @RequestBody Department department){
+        System.out.println(department.getName());
         return departmentRepository.save(department);
     }
     
@@ -52,14 +54,12 @@ public class DepartmentController {
     public Department updateDepartment(@PathVariable(value="id") Long departmentId, @Valid @RequestBody Department departmentDetail){
         Department department=findById(departmentId);
         department.setName(departmentDetail.getName());
-        department.setUser(department.getUser());
         return departmentRepository.save(department);
     }
     
     @DeleteMapping("/department/{id}")
-    private ResponseEntity<?> deleteDepartment(@PathVariable(value="id") Long departmentId){
-        Department department=findById(departmentId);
-        departmentRepository.delete(department);
+    public ResponseEntity<?> deleteDepartment(@PathVariable(value="id") Long departmentId){
+        departmentRepository.delete(findById(departmentId));
         return ResponseEntity.ok().build();
     }
     

@@ -5,6 +5,7 @@
  */
 package com.example.timetable_server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -14,11 +15,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
@@ -51,8 +56,8 @@ public class User implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date sessionTime;
     
-    @OneToOne(fetch = FetchType.LAZY,
-            mappedBy="user")
+    @ManyToOne
+    @JoinColumn(name="department_id", nullable=true)
     private Department department;
 
     public Long getId() {

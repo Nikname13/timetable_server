@@ -54,18 +54,18 @@ public class UserController {
         user.setSecret(userDetail.getSecret());
         user.setIsAdmin(userDetail.isIsAdmin());
         user.setSessionId(userDetail.getSessionId());
+        user.setDepartment(userDetail.getDepartment());
         user.setSession_time(userDetail.getSession_time());
         return userRepository.save(user);
     }
     
     @DeleteMapping("/user/{id}")
-    private ResponseEntity<?> deleteUser(@PathVariable(value="id") Long userId){
-        User post=findById(userId);
-        userRepository.delete(post);
+    public ResponseEntity<?> deleteUser(@PathVariable(value="id") Long userId){
+        userRepository.delete(findById(userId));
         return ResponseEntity.ok().build();
     }
     
     private User findById(Long userId){
-        return userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("Сотрудник", "id", userId));
+        return userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("Пользователь", "id", userId));
     }
 }

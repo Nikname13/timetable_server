@@ -56,9 +56,8 @@ public class CalendarController {
     }
     
     @DeleteMapping("/calendar/{id}")
-    private ResponseEntity<?> deleteCalendar(@PathVariable(value="id") Long calendarId){
-        Calendar calendar=findById(calendarId);
-        calendarRepository.delete(calendar);
+    public ResponseEntity<?> deleteCalendar(@PathVariable(value="id") Long calendarId){
+        calendarRepository.delete(findById(calendarId));
         return ResponseEntity.ok().build();
     }
     
