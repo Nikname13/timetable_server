@@ -35,20 +35,17 @@ public class Worker implements Serializable {
     @NotNull
     private String name;
     
-    @ManyToOne
+    @ManyToOne(optional=false)
     @JoinColumn(name="post_id", nullable=false)
-   // @JsonIgnore
     private Post post;
     
-    @ManyToOne
+    @ManyToOne(optional=false)
     @JoinColumn(name="department_id", nullable=false)
     @OnDelete(action=OnDeleteAction.CASCADE)
-   // @JsonIgnore
     private Department department;
     
-    @ManyToOne
+    @ManyToOne(optional=false)
     @JoinColumn(name="calendar_id", nullable=false)
-   // @JsonIgnore
     private Calendar calendar;
 
     public Long getId() {

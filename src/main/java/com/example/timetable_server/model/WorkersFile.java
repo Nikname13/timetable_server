@@ -26,7 +26,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name="file")
 @EntityListeners(AuditingEntityListener.class)
-public class File {
+public class WorkersFile {
+    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
@@ -35,6 +36,7 @@ public class File {
     private String name;
     
     @NotNull
+    @JsonIgnore
     private String path;
     
     @ManyToOne(optional=false)

@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -28,7 +29,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  * @author a.zolotarev
  */
 @Entity
-@Table(name="load")
+@Table(name="load",uniqueConstraints={@UniqueConstraint(columnNames={"dayOfYear","worker_id"})})
 @EntityListeners(AuditingEntityListener.class)
 public class Load implements Serializable {
     @Id
@@ -48,12 +49,12 @@ public class Load implements Serializable {
     @JsonIgnore
     private Worker worker;
     
+    @NotNull
+    @Temporal(TemporalType.DATE)
     private Date dayOfYear;
     
     @ManyToOne(optional=false)
     @JoinColumn(name="status_id", nullable=false)
-    @OnDelete(action=OnDeleteAction.CASCADE)
-    @JsonIgnore
     private Status status;
 
     public Long getId() {

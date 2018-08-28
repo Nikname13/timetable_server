@@ -37,14 +37,14 @@ public class DayOfCalendarController {
     @Autowired
     CalendarRepository calendarRepository;
 
-    @GetMapping("/calendar/{calendarId}/days_of_calendar")
+    @GetMapping("/calendar/{calendarId}/day_of_calendar")
     public Page<DayOfCalendar> getAllDaysByCalendar(@PathVariable(value = "calendarId") Long calendarId,
             Pageable pageable) {
         return dayOfCalendarRepository.findByCalendarId(calendarId, pageable);
     }
 
     @PostMapping("/calendar/{calendarId}/day_of_calendar")
-    public void createDay(@PathVariable(value = "calendarId") Long calendarId,
+    public void createDays(@PathVariable(value = "calendarId") Long calendarId,
             @Valid @RequestBody List<DayOfCalendar> days) {
         Calendar calendar = calendarRepository.findById(calendarId).orElseThrow(() -> new ResourceNotFoundException("Календарь", "id", calendarId));
         for (DayOfCalendar day : days) {
