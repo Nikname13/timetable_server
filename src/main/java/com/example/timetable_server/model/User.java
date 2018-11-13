@@ -49,10 +49,8 @@ public class User implements Serializable {
     @NotNull
     private boolean isAdmin;
     
-    @NotNull
     private String sessionId;
     
-    @NotNull
     @Temporal(TemporalType.DATE)
     private Date sessionTime;
     
